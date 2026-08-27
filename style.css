@@ -52,7 +52,7 @@ header{
     justify-self: center;
     align-self: center;
 
-    color: var(--text-main);
+    color: var(--accent);
     font-size: 3rem;
     margin-top: var(--space-sm);
     font-variation-settings: 'FILL' 1;
@@ -70,13 +70,9 @@ header{
     border: none;
 }
 #theme-btn > span{
-    color: var(--text-main);
+    color: var(--accent);
     font-size: 2rem;
     font-variation-settings: 'FILL' 1;
-}
-
-.title{
-    color: var(--text-main);
 }
 
 main{
@@ -90,7 +86,49 @@ main{
 }
 .title{
     font-size: 1.5rem;
+    color: var(--text-main);
 }
+.main-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+#input-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+
+    border-radius: var(--space-sm);
+    width: 90%;
+    height: 40px;
+    padding: var(--space-sm);
+    margin: var(--space-sm) 0;
+}
+#text-input{
+    flex: 1;
+    height: 40px;
+    border: none;
+    border-radius: var(--space-sm);
+}
+#text-input::placeholder{
+    text-align: center;
+}
+#add-frete-btn{
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: var(--space-sm);
+
+    background: var(--accent);
+}
+#add-frete-btn > span{
+    color: var(--background);
+    font-variation-settings: 'FILL' 1;
+}
+
 
 footer{
 
