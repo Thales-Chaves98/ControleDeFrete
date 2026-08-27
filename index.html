@@ -10,31 +10,37 @@
 <body>
     
     <header>
-        <section class="header-title">
-            <h1 class="title">CONTROLE DE FRETE</h1>
+        <section class="config">
+            <span class="material-symbols-outlined logo">delivery_truck_speed</span>
+            <button id="theme-btn"><span class="material-symbols-outlined">brightness_5</span></button>
         </section>
-        <section class="header-input">
-            <form id="input-form">
-                <input type="text" placeholder="DIGITE O LOCAL DO FRETE" id="text-input">
-                <button id="add-frete-btn">FRETE<span class="material-symbols-outlined">local_shipping</span></button>
-            </form>
-        </section>
+
+        
     </header>
 
     <main>
+        <section class="main-title">
+            <h1 class="title">CONTROLE DE FRETE</h1>
+        </section>
+        <section class="main-input">
+            <form id="input-form">
+                <input type="text" placeholder="DIGITE O LOCAL DO FRETE" id="text-input">
+                <button id="add-frete-btn"><span class="material-symbols-outlined">local_shipping</span></button>
+            </form>
+        </section>
+
         <!--
             TABELA DE REFERENCIA PARA JS E CSS   
         -->
 
         <table>
             <thead>
-                <tr>FRETE</tr>
-                <tr>SOLICITADO</tr>
-                <tr>DATA</tr>
-                <tr>CONFIRMADO</tr>
-                <tr>DATA</tr>
-                <tr>AÇÕES</tr>
+                <th>FRETE</th>
+                <th>SOLICITADO</th>
+                <th>CONFIRMADO</th>
+                <th>AÇÕES</th>
             </thead>
+            
             <tbody>
                 <tr>
                     <td>LAGUNA</td>
