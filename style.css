@@ -131,7 +131,8 @@ main{
 
 .tabela-frete{
     width: 100%;
-    padding: var(--space-sm);
+    table-layout: fixed;
+
     color: var(--text-main);
     background: var(--surface);
 
@@ -143,31 +144,66 @@ main{
     background: var(--surface-secondary);
 }
 .tabela-header th{
-    padding: var(--space-md);
+    padding: var(--space-xs);
 
     color: var(--text-secondary);
     font-size: 0.8em;
     font-weight: 600;
-    text-align: left;
+    text-align: center;
 
     border-bottom: 1px solid var(--accent);
 }
-.tabela-frete tbody tr{
+.tabela-body tr{
     border-bottom: 1px solid var(--surface-secondary);
 }
-.tabela-frete tbody tr:hover{
+.tabela-body tr:hover{
     background: var(--surface-secondary);
 }
 .tabela-frete td{
-    padding: var(--space-md);
+    padding: var(--space-xs);
 
     font-size: .85rem;
     white-space: nowrap;
+    text-align: center;
 }
 
 .tabela-frete td:first-child{
     font-weight: 600;
     color: var(--text-main);
+}
+.tabela-frete td button:hover{
+    background: var(--surface-secondary);
+    color: var(--accent);
+}
+.tabela-body td button{
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    background: transparent;
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+.tabela-body label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+}
+.tabela-body input[type="checkbox"]{
+    width: 16px;
+    height: 16px;
+
+    accent-color: var(--accent);
+}
+.tabela-body label span{
+    width: 16px;
+    height: 16px;
+    font-weight: bold;
 }
 
 footer{
