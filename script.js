@@ -25,15 +25,53 @@ freteContainer.addEventListener('change', (e) =>{
 
     const frete = fretes.find(frete => frete.id === freteId);
 
+    const span = checkbox.nextElementSibling;
+
     if(!frete) return;
 
     if(tipo === "pedido"){
+        if(!checkbox.checkbox && frete.coletado){
+            checkbox.checked = true;
+
+            alert("Não é possível desmarcar o pedido enquanto a coleta estiver confirmada.");
+            //trocar alert por modal
+            return;
+        }
+
         frete.pedido = checkbox.checked;
+
+        if(frete.pedido){
+            frete.hrPedido = horaConfirmacao();
+
+            span.textContent = frete.hrPedido;
+            span.classList.remove("hidden-span");
+        } else {
+            frete.hrPedido = null;
+            span.classList.add("hidden-span");
+        }
     }
 
     if(tipo === "coletado"){
+        if(!frete.pedido){
+            checkbox.checked = false;
+
+            alert("Não é possível confirmar uma coleta sem confirmar o pedido.");
+            //trocar alert por modal
+            return;
+        }
+
         frete.coletado = checkbox.checked;
-    }
+
+        if(frete.coletado){
+            frete.hrColetado = horaConfirmacao();
+
+            span.textContent = frete.hrColetado;
+            span.classList.remove("hidden-span");
+        } else {
+            frete.hrColetado = null;
+            span.classList.add("hidden-span");
+        }
+    } 
 
     salvarFretes();
 });
@@ -41,7 +79,10 @@ freteContainer.addEventListener('change', (e) =>{
 function criarObjetoFrete(){
     const lugarFrete = inputFrete.value.trim().toUpperCase();
 
-    if(lugarFrete === "") return;
+    if(lugarFrete === "") {
+        inputFrete.focus();
+        return;
+    }
 
     const frete = {
         id: gerarId(),
@@ -192,6 +233,15 @@ function carregarFretes(){
     if(fretesSalvos){
         fretes = JSON.parse(fretesSalvos);
     }
+}
+
+function horaConfirmacao(){
+    const hrAgora = new Date();
+
+    const hr = String(hrAgora.getHours()).padStart(2, "0");
+    const min = String(hrAgora.getMinutes()).padStart(2, "0");
+
+    return `${hr}:${min}`;
 }
 
 carregarFretes();
