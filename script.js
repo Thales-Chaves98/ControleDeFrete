@@ -8,7 +8,6 @@ const freteContainer = document.getElementById("fretes-container");
 let fretes = [];
 
 
-
 addFreteBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -16,28 +15,24 @@ addFreteBtn.addEventListener('click', (e) => {
 
 });
 
-
 function criarObjetoFrete(){
     const lugarFrete = inputFrete.value.trim().toUpperCase();
-    const pedido = false;
-    const coletado = false;
-    const hrPedido = null;
-    const hrColetado = null;
 
     if(lugarFrete === "") return;
 
     const frete = {
         id: gerarId(),
         lugarFrete,
-        pedido,
-        coletado,
-        hrPedido,
-        hrColetado
+        pedido: false,
+        coletado: false,
+        hrPedido: null,
+        hrColetado: null
     }
 
     fretes.push(frete);
-    criarTabelaFrete();
+    salvarFretes();
     limparInputFrete();
+    criarTabelaFrete();
 }
 
 function criarTabelaFrete(){
@@ -52,7 +47,7 @@ function criarTabelaFrete(){
 
         const trHeader = document.createElement("tr");
         
-        const colunas = ["FRETE", "PEDIDO", "FEITO", "AÇÕES"];
+        const colunas = ["FRETE", "PEDIDO", "COLETADO", "AÇÕES"];
         
         colunas.forEach((titulo) =>{
             const th = document.createElement("th");
@@ -68,6 +63,11 @@ function criarTabelaFrete(){
         const tabelaBody = document.createElement("tbody");
         tabelaBody.classList.add("tabela-body");
 
+        tabelaBody.addEventListener('change', (e) =>{
+            if(!e.target.matches("input[type='checkbox']")) return;
+        });
+
+
         fretes.forEach(frete =>{
             const trBody =document.createElement("tr");
 
@@ -82,10 +82,17 @@ function criarTabelaFrete(){
 
             const pedidoCheckbox = document.createElement("input");
             pedidoCheckbox.type = "checkbox";
-            pedidoCheckbox.id = `pedido-${frete.id}`;
+            pedidoCheckbox.dataset.id = `pedido-${frete.id}`;
+            pedidoCheckbox.checked = frete.pedido;
+
+            pedidoCheckbox.addEventListener()
 
             const spanPedido = document.createElement("span")
             spanPedido.textContent = frete.hrPedido;
+
+            if(frete.hrPedido === null){
+                spanPedido.classList.add("hidden-span");
+            }
 
             labelPedido.htmlFor = `pedido-${frete.id}`;
 
@@ -94,24 +101,29 @@ function criarTabelaFrete(){
             tdPedido.appendChild(labelPedido);
             trBody.appendChild(tdPedido);
 
-            //FEITO
-            const tdFeito = document.createElement("td");
+            //COLETADO
+            const tdColetado = document.createElement("td");
 
-            const labelFeito = document.createElement("label");
+            const labelColetado = document.createElement("label");
 
-            const feitoCheckbox = document.createElement("input");
-            feitoCheckbox.type = "checkbox";
-            feitoCheckbox.id = `feito-${frete.id}`;
+            const coletadoCheckbox = document.createElement("input");
+            coletadoCheckbox.type = "checkbox";
+            coletadoCheckbox.dataset.id = `feito-${frete.id}`;
+            coletadoCheckbox.checked = frete.coletado;
 
-            const spanFeito = document.createElement("span")
-            spanFeito.textContent = frete.hrColetado;
+            const spanColetado = document.createElement("span")
+            spanColetado.textContent = frete.hrColetado;
 
-            labelFeito.htmlFor = `feito-${frete.id}`;
+            if(frete.hrColetado === null){
+                spanColetado.classList.add("hidden-span");
+            }
+            
+            labelColetado.htmlFor = `feito-${frete.id}`;
 
-            labelFeito.appendChild(feitoCheckbox);
-            labelFeito.appendChild(spanFeito);
-            tdFeito.appendChild(labelFeito);
-            trBody.appendChild(tdFeito);
+            labelColetado.appendChild(coletadoCheckbox);
+            labelColetado.appendChild(spanColetado);
+            tdColetado.appendChild(labelColetado);
+            trBody.appendChild(tdColetado);
 
             //ACOES
 
@@ -155,6 +167,21 @@ function gerarId(){
 function limparInputFrete(){
     inputFrete.value = "";
 }
+
+function salvarFretes(){
+    localStorage.setItem("fretes", JSON.stringify(fretes));
+}
+
+function carregarFretes(){
+    const fretesSalvos = localStorage.getItem("fretes");
+
+    if(fretesSalvos){
+        fretes = JSON.parse(fretesSalvos);
+    }
+}
+
+carregarFretes();
+criarTabelaFrete();
 
 /* FIX
     INPUT LONGO = OVERFLOW 

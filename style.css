@@ -206,6 +206,9 @@ main{
 .tabela-body label span{
     font-weight: bold;
 }
+.tabela-body label .hidden-span{
+    display: none;
+}
 
 footer{
     background: var(--surface);
