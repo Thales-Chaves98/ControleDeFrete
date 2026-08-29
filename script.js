@@ -6,7 +6,14 @@ const addFreteBtn = document.getElementById("add-frete-btn");
 const freteContainer = document.getElementById("fretes-container");
 
 let fretes = [];
+let isTemaDark = false;
 
+temaBtn.addEventListener('click', () =>{
+    isTemaDark = !isTemaDark;
+
+    aplicarTema(isTemaDark ? "dark" : "light");
+    salvarTema(isTemaDark);
+});
 
 addFreteBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -244,6 +251,36 @@ function horaConfirmacao(){
     return `${hr}:${min}`;
 }
 
+function aplicarTema(tema){
+    const temaSpan = temaBtn.querySelector("span");
+
+    if(tema === "light"){
+        temaSpan.textContent = "moon_stars";
+        document.body.classList.add("light-tema");
+        isTemaDark = false;
+    } else{
+        temaSpan.textContent = "brightness_5";
+        document.body.classList.remove("light-tema");
+        isTemaDark = true;
+    }
+}
+
+function salvarTema(tema){
+    localStorage.setItem("isTemaDark", tema);
+}
+
+function carregarTema(){
+    const temaSalvo = localStorage.getItem("isTemaDark");
+
+    if(temaSalvo !== null){
+        isTemaDark = temaSalvo === "true";
+        aplicarTema(isTemaDark ? "dark" : "light");
+    } else {
+        aplicarTema("dark");
+    }
+}
+
+carregarTema();
 carregarFretes();
 criarTabelaFrete();
 

@@ -27,6 +27,20 @@
     --space-xl: 32px;
 }
 
+.light-tema{
+    --background: #F2F2F2;
+    --surface: #a7acb89a;
+    --surface-secondary: #A7ACB8;
+    --text-main: #0B0C10;
+    --text-secondary: #171A21;
+    --accent: #ecbc0e;
+    --accent-hover: #D4AF37;
+    --success: #3FB950;
+    --success-hover: #3fb94fb7;
+    --danger: #E55353;
+    --danger-hover: #e55353b7;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -68,6 +82,9 @@ header{
 
     background: none;
     border: none;
+}
+#theme-btn:hover{
+    filter: brightness(1.2);
 }
 #theme-btn > span{
     color: var(--accent);
@@ -126,6 +143,9 @@ main{
     border-radius: var(--space-sm);
 
     background: var(--accent);
+}
+#add-frete-btn:hover{
+    filter: brightness(1.2);
 }
 #add-frete-btn > span{
     color: var(--background);
@@ -236,9 +256,6 @@ footer a:hover{
 
 button {
     cursor: pointer;
-}
-button:hover{
-    filter: brightness(1.2);
 }
 button:active{
     transform: scale(.95);
