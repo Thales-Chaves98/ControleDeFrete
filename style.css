@@ -204,8 +204,6 @@ main{
     accent-color: var(--accent);
 }
 .tabela-body label span{
-    width: 16px;
-    height: 16px;
     font-weight: bold;
 }
 

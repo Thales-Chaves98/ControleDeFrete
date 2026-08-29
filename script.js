@@ -37,8 +37,7 @@ function criarObjetoFrete(){
 
     fretes.push(frete);
     criarTabelaFrete();
-    console.log(fretes);
-
+    limparInputFrete();
 }
 
 function criarTabelaFrete(){
@@ -114,6 +113,32 @@ function criarTabelaFrete(){
             tdFeito.appendChild(labelFeito);
             trBody.appendChild(tdFeito);
 
+            //ACOES
+
+            const tdAcoes = document.createElement("td");
+
+            const editarBtnTabela = document.createElement("button");
+            const editarBtnIcon = document.createElement("span");
+
+            editarBtnIcon.classList.add("material-symbols-outlined")
+            editarBtnIcon.textContent = "edit";
+
+            editarBtnTabela.appendChild(editarBtnIcon);
+
+
+            const excluirBtnTabela = document.createElement("button");
+            const excluirBtnIcon = document.createElement("span");
+
+            excluirBtnIcon.classList.add("material-symbols-outlined");
+            excluirBtnIcon.textContent = "delete";
+
+            excluirBtnTabela.appendChild(excluirBtnIcon);
+
+            tdAcoes.appendChild(editarBtnTabela);
+            tdAcoes.appendChild(excluirBtnTabela);
+
+            trBody.appendChild(tdAcoes);
+            tabelaBody.appendChild(trBody);
         });
 
         tabelaFrete.appendChild(tabelaHeader);
@@ -126,3 +151,11 @@ function criarTabelaFrete(){
 function gerarId(){
     return crypto.randomUUID();
 }
+
+function limparInputFrete(){
+    inputFrete.value = "";
+}
+
+/* FIX
+    INPUT LONGO = OVERFLOW 
+*/
