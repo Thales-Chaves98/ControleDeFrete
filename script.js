@@ -15,6 +15,29 @@ addFreteBtn.addEventListener('click', (e) => {
 
 });
 
+freteContainer.addEventListener('change', (e) =>{
+    if(!e.target.matches("input[type='checkbox']")) return;
+
+    const checkbox = e.target;
+
+    const freteId = checkbox.dataset.freteId;
+    const tipo = checkbox.dataset.tipo;
+
+    const frete = fretes.find(frete => frete.id === freteId);
+
+    if(!frete) return;
+
+    if(tipo === "pedido"){
+        frete.pedido = checkbox.checked;
+    }
+
+    if(tipo === "coletado"){
+        frete.coletado = checkbox.checked;
+    }
+
+    salvarFretes();
+});
+
 function criarObjetoFrete(){
     const lugarFrete = inputFrete.value.trim().toUpperCase();
 
@@ -63,11 +86,6 @@ function criarTabelaFrete(){
         const tabelaBody = document.createElement("tbody");
         tabelaBody.classList.add("tabela-body");
 
-        tabelaBody.addEventListener('change', (e) =>{
-            if(!e.target.matches("input[type='checkbox']")) return;
-        });
-
-
         fretes.forEach(frete =>{
             const trBody =document.createElement("tr");
 
@@ -82,10 +100,9 @@ function criarTabelaFrete(){
 
             const pedidoCheckbox = document.createElement("input");
             pedidoCheckbox.type = "checkbox";
-            pedidoCheckbox.dataset.id = `pedido-${frete.id}`;
+            pedidoCheckbox.dataset.freteId = frete.id;
+            pedidoCheckbox.dataset.tipo = "pedido";
             pedidoCheckbox.checked = frete.pedido;
-
-            pedidoCheckbox.addEventListener()
 
             const spanPedido = document.createElement("span")
             spanPedido.textContent = frete.hrPedido;
@@ -93,8 +110,6 @@ function criarTabelaFrete(){
             if(frete.hrPedido === null){
                 spanPedido.classList.add("hidden-span");
             }
-
-            labelPedido.htmlFor = `pedido-${frete.id}`;
 
             labelPedido.appendChild(pedidoCheckbox);
             labelPedido.appendChild(spanPedido);
@@ -108,7 +123,8 @@ function criarTabelaFrete(){
 
             const coletadoCheckbox = document.createElement("input");
             coletadoCheckbox.type = "checkbox";
-            coletadoCheckbox.dataset.id = `feito-${frete.id}`;
+            coletadoCheckbox.dataset.freteId = frete.id;
+            coletadoCheckbox.dataset.tipo = "coletado";
             coletadoCheckbox.checked = frete.coletado;
 
             const spanColetado = document.createElement("span")
@@ -117,8 +133,6 @@ function criarTabelaFrete(){
             if(frete.hrColetado === null){
                 spanColetado.classList.add("hidden-span");
             }
-            
-            labelColetado.htmlFor = `feito-${frete.id}`;
 
             labelColetado.appendChild(coletadoCheckbox);
             labelColetado.appendChild(spanColetado);
