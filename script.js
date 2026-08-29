@@ -63,6 +63,7 @@ function criarTabelaFrete(){
             
         });
 
+        
         tabelaHeader.appendChild(trHeader);
        
         const tabelaBody = document.createElement("tbody");
@@ -71,7 +72,47 @@ function criarTabelaFrete(){
         fretes.forEach(frete =>{
             const trBody =document.createElement("tr");
 
-            
+            const tdLugar = document.createElement("td");
+            tdLugar.textContent = frete.lugarFrete;
+            trBody.appendChild(tdLugar);
+
+            //PEDIDO 
+            const tdPedido = document.createElement("td");
+
+            const labelPedido = document.createElement("label");
+
+            const pedidoCheckbox = document.createElement("input");
+            pedidoCheckbox.type = "checkbox";
+            pedidoCheckbox.id = `pedido-${frete.id}`;
+
+            const spanPedido = document.createElement("span")
+            spanPedido.textContent = frete.hrPedido;
+
+            labelPedido.htmlFor = `pedido-${frete.id}`;
+
+            labelPedido.appendChild(pedidoCheckbox);
+            labelPedido.appendChild(spanPedido);
+            tdPedido.appendChild(labelPedido);
+            trBody.appendChild(tdPedido);
+
+            //FEITO
+            const tdFeito = document.createElement("td");
+
+            const labelFeito = document.createElement("label");
+
+            const feitoCheckbox = document.createElement("input");
+            feitoCheckbox.type = "checkbox";
+            feitoCheckbox.id = `feito-${frete.id}`;
+
+            const spanFeito = document.createElement("span")
+            spanFeito.textContent = frete.hrColetado;
+
+            labelFeito.htmlFor = `feito-${frete.id}`;
+
+            labelFeito.appendChild(feitoCheckbox);
+            labelFeito.appendChild(spanFeito);
+            tdFeito.appendChild(labelFeito);
+            trBody.appendChild(tdFeito);
 
         });
 
