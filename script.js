@@ -6,7 +6,7 @@ const addFreteBtn = document.getElementById("add-frete-btn");
 const freteContainer = document.getElementById("fretes-container");
 
 const alertaModal = document.getElementById("modal-alerta");
-const modalTexto = document.getElementById("modal-alerta-texto");
+const modalAlertaTexto = document.getElementById("modal-alerta-texto");
 const modalAlertaBtn = document.getElementById("modal-alerta-btn");
 
 let fretes = [];
@@ -44,7 +44,9 @@ freteContainer.addEventListener('change', (e) =>{
         if(!checkbox.checked && frete.coletado){
             checkbox.checked = true;
 
-            alert("Não é possível desmarcar o pedido enquanto a coleta estiver confirmada.");
+            modalAlertaTexto.textContent = "NÃO É POSSÍVEL CANCELAR UM PEDIDO ENQUANTO A COLETA ESTIVER CONFIRMADA.";
+
+            abrirModal(alertaModal);
             //trocar alert por modal
             return;
         }
@@ -66,8 +68,10 @@ freteContainer.addEventListener('change', (e) =>{
         if(!frete.pedido){
             checkbox.checked = false;
 
-            alert("Não é possível confirmar uma coleta sem confirmar o pedido.");
-            //trocar alert por modal
+            modalAlertaTexto.textContent = "NÃO É POSSÍVEL CONFIRMAR UMA COLETA SEM CONFIRMAR O PEDIDO";
+
+            abrirModal(alertaModal);
+            
             return;
         }
 
@@ -85,6 +89,10 @@ freteContainer.addEventListener('change', (e) =>{
     } 
 
     salvarFretes();
+});
+
+modalAlertaBtn.addEventListener('click', () =>{
+    fecharModal(alertaModal);
 });
 
 function criarObjetoFrete(){
@@ -267,6 +275,14 @@ function aplicarTema(tema){
         document.body.classList.remove("light-tema");
         isTemaDark = true;
     }
+}
+
+function abrirModal(modal){
+    modal.classList.add("active");
+}
+
+function fecharModal(modal){
+    modal.classList.remove("active");
 }
 
 

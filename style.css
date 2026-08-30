@@ -304,9 +304,9 @@ footer a:hover{
 .modal.active .modal-alerta-conteudo{
     transform: translateY(0);
 }
-.modal-alerta-icon{
+.modal-alerta-conteudo span{
     color: var(--accent);
-    font-size: 2.5rem;
+    font-size: 3rem;
 
     font-variation-settings: 'FILL' 1;
 }
@@ -323,8 +323,8 @@ footer a:hover{
     border: none;
     border-radius: var(--space-sm);
 
-    background: var(--accent);
-    color: var(--background);
+    background: var(--danger);
+    color: var(--text-main);
 
     font-weight: 600;
 
