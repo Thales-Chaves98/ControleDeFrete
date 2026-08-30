@@ -5,6 +5,10 @@ const addFreteBtn = document.getElementById("add-frete-btn");
 
 const freteContainer = document.getElementById("fretes-container");
 
+const alertaModal = document.getElementById("modal-alerta");
+const modalTexto = document.getElementById("modal-alerta-texto");
+const modalAlertaBtn = document.getElementById("modal-alerta-btn");
+
 let fretes = [];
 let isTemaDark = false;
 
@@ -37,7 +41,7 @@ freteContainer.addEventListener('change', (e) =>{
     if(!frete) return;
 
     if(tipo === "pedido"){
-        if(!checkbox.checkbox && frete.coletado){
+        if(!checkbox.checked && frete.coletado){
             checkbox.checked = true;
 
             alert("Não é possível desmarcar o pedido enquanto a coleta estiver confirmada.");
@@ -265,6 +269,9 @@ function aplicarTema(tema){
     }
 }
 
+
+
+
 function salvarTema(tema){
     localStorage.setItem("isTemaDark", tema);
 }
@@ -279,6 +286,8 @@ function carregarTema(){
         aplicarTema("dark");
     }
 }
+
+
 
 carregarTema();
 carregarFretes();
