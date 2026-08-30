@@ -33,7 +33,7 @@
     --surface-secondary: #A7ACB8;
     --text-main: #0B0C10;
     --text-secondary: #171A21;
-    --accent: #ecbc0e;
+    --accent: #b18c08;
     --accent-hover: #D4AF37;
     --success: #3FB950;
     --success-hover: #3fb94fb7;
@@ -219,6 +219,8 @@ main{
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
+
+    line-height: 1;
 }
 .tabela-body input[type="checkbox"]{
     width: 16px;
@@ -336,6 +338,78 @@ footer a:hover{
 #modal-alerta-btn:hover{
     filter: brightness(1.2);
 }
+
+/*CHECKBOX */
+
+.tabela-body label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-xs);
+
+    line-height: 1;
+}
+
+.tabela-body input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 18px;
+    height: 18px;
+
+    margin: 0;
+
+    border: 2px solid var(--text-main);
+    border-radius: 4px;
+
+    background: transparent;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.tabela-body input[type="checkbox"]::before {
+    content: "";
+
+    width: 12px;
+    height: 6px;
+
+    border-left: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+
+    transform: translateY(-2px) rotate(-45deg) scale(0);
+
+    transition: transform 0.15s ease;
+}
+
+.tabela-body input[type="checkbox"]:checked {
+    border-color: transparent;
+}
+
+.tabela-body input[type="checkbox"]:checked::before {
+    transform: translateY(-1px) rotate(-45deg) scale(1);
+}
+
+.tabela-body input[type="checkbox"]:hover {
+    filter: brightness(1.2);
+}
+
+.tabela-body label span {
+    font-weight: bold;
+}
+
+.tabela-body label .hidden-span {
+    display: none;
+}
+
+
 
 /* CONFIG GLOBAL*/
 
