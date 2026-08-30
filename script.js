@@ -110,6 +110,14 @@ freteContainer.addEventListener('click', (e) => {
 
         confirmarExclusao(freteId);
     }
+
+    if(editar){
+        const linha = editar.closest("tr");
+        const checkbox = linha.querySelector("input[type='checkbox']");
+        const freteId = checkbox.dataset.freteId;
+
+        editarFrete(freteId);
+    }
 });
 
 modalAlertaBtn.addEventListener('click', () =>{
@@ -336,6 +344,15 @@ function confirmarExclusao(idFrete){
     abrirModal(modalExcluir);
 }
 
+function editarFrete(freteId){
+    editarFreteId = freteId;
+
+    const frete = fretes.find(frete => frete.id === freteId);
+
+    if(!frete) return;
+
+    const linha = document.querySelector(`input[data-frete-id="${freteId}"]`).closest("tr");
+}
 
 function salvarTema(tema){
     localStorage.setItem("isTemaDark", tema);

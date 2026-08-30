@@ -290,8 +290,8 @@ footer a:hover{
     width: 100%;
     max-width: 350px;
 
-    background: var(--surface);
-    border: 1px solid var(--surface-secondary);
+    background: var(--surface-secondary);
+    border: 1px solid var(--surface);
     border-radius: var(--space-sm);
 
     text-align: center;
