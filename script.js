@@ -5,12 +5,20 @@ const addFreteBtn = document.getElementById("add-frete-btn");
 
 const freteContainer = document.getElementById("fretes-container");
 
-const alertaModal = document.getElementById("modal-alerta");
+const modalAlerta = document.getElementById("modal-alerta");
 const modalAlertaTexto = document.getElementById("modal-alerta-texto");
 const modalAlertaBtn = document.getElementById("modal-alerta-btn");
 
+const modalExcluir = document.getElementById("modal-excluir");
+const cancelarExcluirBtn = document.getElementById("cancelar-excluir-btn");
+const confirmarExcluirBtn = document.getElementById("confirmar-excluir-btn");
+
+
 let fretes = [];
 let isTemaDark = false;
+
+let deletarFreteId = null;
+let editarFreteId = null;
 
 temaBtn.addEventListener('click', () =>{
     isTemaDark = !isTemaDark;
@@ -46,7 +54,7 @@ freteContainer.addEventListener('change', (e) =>{
 
             modalAlertaTexto.textContent = "NÃO É POSSÍVEL CANCELAR UM PEDIDO ENQUANTO A COLETA ESTIVER CONFIRMADA.";
 
-            abrirModal(alertaModal);
+            abrirModal(modalAlerta);
             //trocar alert por modal
             return;
         }
@@ -70,7 +78,7 @@ freteContainer.addEventListener('change', (e) =>{
 
             modalAlertaTexto.textContent = "NÃO É POSSÍVEL CONFIRMAR UMA COLETA SEM CONFIRMAR O PEDIDO";
 
-            abrirModal(alertaModal);
+            abrirModal(modalAlerta);
             
             return;
         }
@@ -91,9 +99,34 @@ freteContainer.addEventListener('change', (e) =>{
     salvarFretes();
 });
 
-modalAlertaBtn.addEventListener('click', () =>{
-    fecharModal(alertaModal);
+freteContainer.addEventListener('click', (e) => {
+    const excluir = e.target.closest(".excluir-btn");
+    const editar = e.target.closest(".editar-btn");
+   
+    if(excluir){
+        const linha = excluir.closest("tr");
+        const checkbox = linha.querySelector("input[type='checkbox']");
+        const freteId = checkbox.dataset.freteId;
+
+        confirmarExclusao(freteId);
+    }
 });
+
+modalAlertaBtn.addEventListener('click', () =>{
+    fecharModal(modalAlerta);
+});
+
+cancelarExcluirBtn.addEventListener('click', () =>{
+    fecharModal(modalExcluir);
+    deletarFreteId = null;
+});
+
+confirmarExcluirBtn.addEventListener('click', () =>{
+    if(!deletarFreteId) return;
+    deletarFrete(deletarFreteId);
+    deletarFreteId = null;
+});
+
 
 function criarObjetoFrete(){
     const lugarFrete = inputFrete.value.trim().toUpperCase();
@@ -203,25 +236,28 @@ function criarTabelaFrete(){
 
             const tdAcoes = document.createElement("td");
 
-            const editarBtnTabela = document.createElement("button");
+            const editarBtn = document.createElement("button");
+            editarBtn.classList.add("editar-btn");
             const editarBtnIcon = document.createElement("span");
 
             editarBtnIcon.classList.add("material-symbols-outlined")
             editarBtnIcon.textContent = "edit";
 
-            editarBtnTabela.appendChild(editarBtnIcon);
+            editarBtn.appendChild(editarBtnIcon);
 
 
-            const excluirBtnTabela = document.createElement("button");
+            const excluirBtn = document.createElement("button");
+            excluirBtn.classList.add("excluir-btn");
+
             const excluirBtnIcon = document.createElement("span");
 
             excluirBtnIcon.classList.add("material-symbols-outlined");
             excluirBtnIcon.textContent = "delete";
 
-            excluirBtnTabela.appendChild(excluirBtnIcon);
+            excluirBtn.appendChild(excluirBtnIcon);
 
-            tdAcoes.appendChild(editarBtnTabela);
-            tdAcoes.appendChild(excluirBtnTabela);
+            tdAcoes.appendChild(editarBtn);
+            tdAcoes.appendChild(excluirBtn);
 
             trBody.appendChild(tdAcoes);
             tabelaBody.appendChild(trBody);
@@ -285,7 +321,20 @@ function fecharModal(modal){
     modal.classList.remove("active");
 }
 
+function deletarFrete(idFrete){
+    fretes = fretes.filter((f) => {
+        return f.id !== idFrete;
+    })
 
+    criarTabelaFrete();
+    salvarFretes();
+    fecharModal(modalExcluir);
+}
+
+function confirmarExclusao(idFrete){
+    deletarFreteId = idFrete;
+    abrirModal(modalExcluir);
+}
 
 
 function salvarTema(tema){

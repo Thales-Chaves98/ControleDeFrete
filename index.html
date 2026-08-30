@@ -41,18 +41,31 @@
 
 
     <div id="modal-alerta" class="modal">
-    <div class="modal-alerta-conteudo">
-        <span class="material-symbols-outlined">
-            warning
-        </span>
+        <div class="modal-alerta-conteudo">
+            <span class="material-symbols-outlined">
+                warning
+            </span>
 
-        <p id="modal-alerta-texto"></p>
+            <p id="modal-alerta-texto"></p>
 
-        <button id="modal-alerta-btn" type="button">
-            OK
-        </button>
+            <button id="modal-alerta-btn" type="button">
+                OK
+            </button>
+        </div>
     </div>
-</div>
+    
+    <section id="modal-excluir" class="modal" >
+        <div class="modal-excluir-conteudo">
+            <span class="material-symbols-outlined">warning</span>
+            <p>TEM CERTEZA QUE DESEJA EXCLUIR ESSE FRETE?</p>
+            <p>ESSA AÇÃO NÃO PODERÁ SER DESFEITA!</p>
+
+            <div class="modal-acoes">
+                <button id="cancelar-excluir-btn" class="cancelar-btn">CANCELAR</button>
+                <button id="confirmar-excluir-btn" class="excluir-btn">EXCLUIR</button>
+            </div>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
