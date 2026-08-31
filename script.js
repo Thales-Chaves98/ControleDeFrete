@@ -443,6 +443,4 @@ carregarTema();
 carregarFretes();
 criarTabelaFrete();
 
-/* FIX
-    INPUT LONGO = OVERFLOW 
-*/
+
