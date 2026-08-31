@@ -290,7 +290,17 @@ function criarTabelaFrete(){
         tabelaFrete.appendChild(tabelaBody);
 
         freteContainer.appendChild(tabelaFrete);
+    } else {
+        freteContainer.innerHTML = 
+         `
+            <div class="conteiner-vazio">
+                <span class="material-symbols-outlined">package_2</span>
+                <p>NENHUM FRETE !</p>
+            </div>
+        `
     }
+
+
 }
 
 function gerarId(){
