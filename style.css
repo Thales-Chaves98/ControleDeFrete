@@ -412,6 +412,26 @@ footer a:hover{
     background: var(--success-hover);
 }
 
+.conteiner-vazio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+.conteiner-vazio span{
+    color: var(--text-main);
+    font-size: 5em;
+    font-variation-settings: 'FILL' 1;
+}
+
+.conteiner-vazio p{
+    color: var(--text-main);
+    font-size: 2em;
+    font-weight: bold;
+}
 
 /*CHECKBOX */
 
