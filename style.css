@@ -196,6 +196,10 @@ main{
 .tabela-frete td:first-child{
     font-weight: 600;
     color: var(--text-main);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .tabela-frete td button:hover{
     background: var(--surface-secondary);
