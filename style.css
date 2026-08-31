@@ -29,8 +29,8 @@
 
 .light-tema{
     --background: #F2F2F2;
-    --surface: #a7acb89a;
-    --surface-secondary: #A7ACB8;
+    --surface: #a1a3a7;
+    --surface-secondary: #b9bdc7;
     --text-main: #0B0C10;
     --text-secondary: #171A21;
     --accent: #b18c08;
@@ -235,6 +235,29 @@ main{
     display: none;
 }
 
+.tabela-body td:first-child input{
+    width: 100%;
+    height: 32px;
+
+    padding: var(--space-xs);
+
+    border: none;
+    border-radius: var(--space-xl);
+
+    background: var(--accent);
+    color: var(--background);
+    caret-color: var(--background);
+
+    font-weight: 600;
+    text-align: center;  
+    
+    outline: none;
+}
+
+.tabela-body .salvar-edicao-btn:hover{
+    color: var(--accent);
+}
+
 footer{
     background: var(--surface);
     width: 100%;
@@ -384,6 +407,7 @@ footer a:hover{
 .cancelar-btn:hover{
     background: var(--success-hover);
 }
+
 
 /*CHECKBOX */
 

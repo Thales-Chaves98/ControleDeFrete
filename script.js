@@ -102,6 +102,7 @@ freteContainer.addEventListener('change', (e) =>{
 freteContainer.addEventListener('click', (e) => {
     const excluir = e.target.closest(".excluir-btn");
     const editar = e.target.closest(".editar-btn");
+    const salvar = e.target.closest(".salvar-edicao-btn");
    
     if(excluir){
         const linha = excluir.closest("tr");
@@ -117,6 +118,14 @@ freteContainer.addEventListener('click', (e) => {
         const freteId = checkbox.dataset.freteId;
 
         editarFrete(freteId);
+    }
+
+    if(salvar){
+        const linha = salvar.closest("tr");
+        const checkbox = linha.querySelector("input[type='checkbox']");
+        const freteId = checkbox.dataset.freteId;
+
+        salvarEdicao(freteId);
     }
 });
 
@@ -345,6 +354,8 @@ function confirmarExclusao(idFrete){
 }
 
 function editarFrete(freteId){
+    if(editarFreteId !== null) return;
+
     editarFreteId = freteId;
 
     const frete = fretes.find(frete => frete.id === freteId);
@@ -352,6 +363,57 @@ function editarFrete(freteId){
     if(!frete) return;
 
     const linha = document.querySelector(`input[data-frete-id="${freteId}"]`).closest("tr");
+    const tdLugar = linha.querySelector("td:first-child");
+    const inputEditar = document.createElement("input");
+    
+    inputEditar.type = "text";
+    inputEditar.value = frete.lugarFrete;
+
+    tdLugar.innerHTML = "";
+    tdLugar.appendChild(inputEditar);
+
+    inputEditar.focus();
+
+    //ACOES
+    const tdAcoes = linha.querySelector("td:last-child");
+    tdAcoes.innerHTML = "";
+
+    const salvarBtn = document.createElement("button");
+    salvarBtn.classList.add("salvar-edicao-btn");
+
+    const salvarIcon = document.createElement("span");
+    salvarIcon.classList.add("material-symbols-outlined");
+    salvarIcon.textContent = "save";
+
+    salvarBtn.appendChild(salvarIcon);
+    tdAcoes.appendChild(salvarBtn);
+}
+
+function salvarEdicao(freteId){
+    const frete = fretes.find(frete => frete.id === freteId);
+
+    if(!frete) return;
+
+    const linha = document
+        .querySelector(`input[data-frete-id="${freteId}"]`)
+        .closest("tr");
+
+    const inputEditar = linha.querySelector("td:first-child input");
+
+    const novoLugar = inputEditar.value.trim().toUpperCase();
+
+    if(novoLugar === ""){
+        inputEditar.focus();
+        return;
+    }
+
+    frete.lugarFrete = novoLugar;
+
+    salvarFretes();
+
+    editarFreteId = null;
+
+    criarTabelaFrete();
 }
 
 function salvarTema(tema){
@@ -377,4 +439,5 @@ criarTabelaFrete();
 
 /* FIX
     INPUT LONGO = OVERFLOW 
+    CRIAR UM FRETE COM EDITAR HABILITADO QUEBRA
 */
