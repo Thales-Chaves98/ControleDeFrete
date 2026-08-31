@@ -30,7 +30,13 @@ temaBtn.addEventListener('click', () =>{
 addFreteBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
-    criarObjetoFrete();
+    if(editarFreteId === null){
+        criarObjetoFrete();
+    } else {
+        modalAlertaTexto.textContent = "NÃO É POSSÍVEL ADICIONAR UM FRETE ENQUANTO ESTIVER EDITANDO UM FRETE !";
+
+        abrirModal(modalAlerta);
+    }
 
 });
 
@@ -439,5 +445,4 @@ criarTabelaFrete();
 
 /* FIX
     INPUT LONGO = OVERFLOW 
-    CRIAR UM FRETE COM EDITAR HABILITADO QUEBRA
 */
